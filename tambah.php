@@ -1,106 +1,107 @@
+<?php
+include "koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tambah Data Bioskop</title>
-  <style>
-    /* Background gradient */
-    body {
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-    }
-
-    /* Card */
-    .card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      width: 350px;
-      animation: fadeIn 0.8s ease-in-out;
-    }
-
-    /* Animasi masuk */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Judul */
-    .card h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    /* Label */
-    label {
-      font-weight: 500;
-      display: block;
-      margin-bottom: 5px;
-      color: #444;
-    }
-
-    /* Input */
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      transition: 0.3s;
-      font-size: 14px;
-    }
-
-    input:focus {
-      border-color: #667eea;
-      outline: none;
-      box-shadow: 0 0 8px rgba(102, 126, 234, 0.4);
-    }
-
-    /* Tombol */
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #667eea;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #5a67d8;
-      transform: scale(1.05);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Bioskop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 350px;
+            text-align: center;
+        }
+        .container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #444;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 5px rgba(37,117,252,0.5);
+        }
+        button {
+            background: #2575fc;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #1a5edb;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #2575fc;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <h2>Tambah Data Bioskop</h2>
-    <form action="proses.php" method="post">
-      <label>Film</label>
-      <input type="text" name="film" placeholder="Masukkan judul film" required>
-
-      <label>Jadwal</label>
-      <input type="text" name="jadwal" placeholder="Masukkan jadwal tayang" required>
-
-      <label>Penonton</label>
-      <input type="number" name="penonton" placeholder="Jumlah penonton" required>
-
-      <label>Tiket</label>
-      <input type="text" name="tiket" placeholder="Harga tiket" required>
-
-      <button type="submit">Simpan</button>
-    </form>
-  </div>
+    <div class="container">
+        <h2>Tambah Data Bioskop</h2>
+        <form action="proses.php" method="POST">
+            <div class="form-group">
+                <label>Film</label>
+                <input type="text" name="film" placeholder="Judul Film" required>
+            </div>
+            <div class="form-group">
+                <label>Jadwal</label>
+                <input type="datetime-local" name="jadwal" required>
+            </div>
+            <div class="form-group">
+                <label>Penonton</label>
+                <input type="text" name="penonton" placeholder="Nama Penonton" required>
+            </div>
+            <div class="form-group">
+                <label>Tiket</label>
+                <input type="text" name="tiket" placeholder="Kode Tiket" required>
+            </div>
+            <button type="submit">Simpan</button>
+        </form>
+        <a href="index.php" class="back-link">← Kembali</a>
+    </div>
 </body>
 </html>
