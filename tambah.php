@@ -4,13 +4,14 @@ include "koneksi.php";
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $film = $_POST['film'];
-    $jadwal = $_POST['jadwal'];
-    $penonton = $_POST['penonton'];
-    $tiket = $_POST['tiket'];
+    $nama_mobil = $_POST['nama_mobil'];
+    $stok       = $_POST['stok'];
+    $harga      = $_POST['harga'];
+    $umur       = $_POST['umur'];
+    $email      = $_POST['email'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO bioskop (film, jadwal, penonton, tiket) 
-                                     VALUES ('$film', '$jadwal', '$penonton', '$tiket')");
+    $query = mysqli_query($koneksi, "INSERT INTO mobil (nama_mobil, stok, harga, umur, email) 
+                                     VALUES ('$nama_mobil', '$stok', '$harga', '$umur', '$email')");
     if ($query) {
         $message = "success";
     } else {
@@ -23,11 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Data Bioskop</title>
+    <title>Tambah Data Mobil</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
             margin: 0;
             padding: 0;
             display: flex;
@@ -59,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .btn {
             width: 100%;
             padding: 10px;
-            background: #2575fc;
+            background: #ff5e62;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -67,14 +68,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-size: 15px;
         }
         .btn:hover {
-            background: #1a5edb;
+            background: #e14b4f;
         }
         .back {
             display: block;
             text-align: center;
             margin-top: 10px;
             text-decoration: none;
-            color: #2575fc;
+            color: #ff5e62;
         }
         .message {
             text-align: center;
@@ -87,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="card">
-        <h2>Tambah Data Bioskop</h2>
+        <h2>Tambah Data Mobil</h2>
 
         <?php if ($message == "success"): ?>
             <p class="message success">✅ Data berhasil disimpan!</p>
@@ -97,20 +98,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <form action="" method="POST">
             <div class="input-group">
-                <input type="text" name="film" placeholder="Judul Film" required>
+                <input type="text" name="nama_mobil" placeholder="Nama Mobil" required>
             </div>
             <div class="input-group">
-                <input type="datetime-local" name="jadwal" required>
+                <input type="number" name="stok" placeholder="Stok" required>
             </div>
             <div class="input-group">
-                <input type="text" name="penonton" placeholder="Nama Penonton" required>
+                <input type="number" name="harga" placeholder="Harga" required>
             </div>
             <div class="input-group">
-                <input type="text" name="tiket" placeholder="Kode Tiket" required>
+                <input type="number" name="umur" placeholder="Umur (tahun)" required>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email" required>
             </div>
             <button type="submit" class="btn">Simpan</button>
         </form>
         <a href="index.php" class="back">← Kembali</a>
     </div>
-</body>
-</html>
+</body

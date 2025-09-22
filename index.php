@@ -1,6 +1,6 @@
 <?php
 include "koneksi.php";
-$query = mysqli_query($koneksi, "SELECT * FROM mobil");
+$query = mysqli_query($koneksi, "SELECT * FROM bioskop");
 ?>
 
 <!DOCTYPE html>
@@ -8,16 +8,16 @@ $query = mysqli_query($koneksi, "SELECT * FROM mobil");
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar Data Mobil</title>
+  <title>Daftar Data Bioskop</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ff9966, #ff5e62);
+      background: linear-gradient(135deg, #667eea, #764ba2);
       margin: 0;
       padding: 0;
     }
     .container {
-      max-width: 950px;
+      max-width: 900px;
       margin: 50px auto;
       background: #fff;
       border-radius: 15px;
@@ -52,14 +52,14 @@ $query = mysqli_query($koneksi, "SELECT * FROM mobil");
       text-align: center;
     }
     table th {
-      background: #ff5e62;
+      background: #667eea;
       color: white;
     }
     table tr:nth-child(even) {
-      background: #f9f9f9;
+      background: #f2f2f2;
     }
     table tr:hover {
-      background: #ffe0d1;
+      background: #e1e7ff;
     }
     .aksi a {
       text-decoration: none;
@@ -87,26 +87,24 @@ $query = mysqli_query($koneksi, "SELECT * FROM mobil");
 </head>
 <body>
   <div class="container">
-    <h2>🚗 Daftar Data Mobil</h2>
-    <a href="tambah.php" class="btn-tambah">+ Tambah Mobil</a>
+    <h2>🎬 Daftar Data Bioskop</h2>
+    <a href="tambah.php" class="btn-tambah">+ Tambah Data</a>
     <table>
       <tr>
         <th>ID</th>
-        <th>Nama Mobil</th>
-        <th>Stok</th>
-        <th>Harga</th>
-        <th>Umur</th>
-        <th>Email</th>
+        <th>Film</th>
+        <th>Jadwal</th>
+        <th>Penonton</th>
+        <th>Tiket</th>
         <th>Aksi</th>
       </tr>
       <?php while ($row = mysqli_fetch_array($query)) { ?>
         <tr>
           <td><?php echo $row['id']; ?></td>
-          <td><?php echo $row['nama_mobil']; ?></td>
-          <td><?php echo $row['stok']; ?></td>
-          <td><?php echo $row['harga']; ?></td>
-          <td><?php echo $row['umur']; ?></td>
-          <td><?php echo $row['email']; ?></td>
+          <td><?php echo $row['film']; ?></td>
+          <td><?php echo $row['jadwal']; ?></td>
+          <td><?php echo $row['penonton']; ?></td>
+          <td><?php echo $row['tiket']; ?></td>
           <td class="aksi">
             <a href="ubah.php?id=<?php echo $row['id']; ?>" class="ubah">Ubah</a>
             <a href="hapus.php?id=<?php echo $row['id']; ?>" class="hapus" onclick="return confirm('Yakin ingin hapus data ini?')">Hapus</a>
