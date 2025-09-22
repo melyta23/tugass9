@@ -1,82 +1,83 @@
 <?php
 include "koneksi.php";
 
-$id = $_GET['id'];
-$query = mysqli_query($koneksi, "DELETE FROM bioskop WHERE id='$id'");
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $query = mysqli_query($koneksi, "DELETE FROM bioskop WHERE id='$id'");
 
-if ($query) {
-    $status = "success";
-    $message = "Data berhasil dihapus!";
+    $status = $query ? "success" : "error";
 } else {
-    $status = "error";
-    $message = "Gagal menghapus data!";
+    $status = "invalid";
 }
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Hapus Data Bioskop</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-    }
-    .card {
-      background: #fff;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      text-align: center;
-      width: 400px;
-      animation: fadeIn 0.6s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    h2 {
-      margin-bottom: 15px;
-      color: #333;
-    }
-    p {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-    .success {
-      color: #2ecc71;
-      font-weight: 600;
-    }
-    .error {
-      color: #e74c3c;
-      font-weight: 600;
-    }
-    a {
-      display: inline-block;
-      padding: 12px 20px;
-      background: #667eea;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      transition: 0.3s;
-    }
-    a:hover {
-      background: #5a67d8;
-      transform: scale(1.05);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hapus Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 350px;
+        }
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        p {
+            font-size: 15px;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            background: #2575fc;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #1a5edb;
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <h2><?= $status == "success" ? "Berhasil 🎉" : "Gagal ❌"; ?></h2>
-    <p class="<?= $status; ?>"><?= $message; ?></p>
-    <a href="index.php">⬅ Kembali ke Data</a>
-  </div>
+    <div class="card">
+        <?php if ($status == "success"): ?>
+            <h2>Berhasil 🎉</h2>
+            <p class="success">Data berhasil dihapus!</p>
+        <?php elseif ($status == "error"): ?>
+            <h2>Gagal ❌</h2>
+            <p class="error">Data gagal dihapus!</p>
+        <?php else: ?>
+            <h2>Ups ⚠️</h2>
+            <p class="error">ID tidak ditemukan!</p>
+        <?php endif; ?>
+        <a href="index.php" class="btn">← Kembali ke Data</a>
+    </div>
 </body>
 </html>
