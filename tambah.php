@@ -1,5 +1,22 @@
 <?php
 include "koneksi.php";
+
+$message = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $film = $_POST['film'];
+    $jadwal = $_POST['jadwal'];
+    $penonton = $_POST['penonton'];
+    $tiket = $_POST['tiket'];
+
+    $query = mysqli_query($koneksi, "INSERT INTO bioskop (film, jadwal, penonton, tiket) 
+                                     VALUES ('$film', '$jadwal', '$penonton', '$tiket')");
+    if ($query) {
+        $message = "success";
+    } else {
+        $message = "error";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -18,90 +35,82 @@ include "koneksi.php";
             align-items: center;
             height: 100vh;
         }
-        .container {
+        .card {
             background: #fff;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             width: 350px;
+        }
+        h2 {
+            margin-bottom: 20px;
             text-align: center;
         }
-        .container h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .form-group {
+        .input-group {
             margin-bottom: 15px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #444;
         }
         input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             border-radius: 8px;
             outline: none;
-            transition: 0.3s;
         }
-        input:focus {
-            border-color: #2575fc;
-            box-shadow: 0 0 5px rgba(37,117,252,0.5);
-        }
-        button {
-            background: #2575fc;
-            color: white;
-            border: none;
-            padding: 12px;
+        .btn {
             width: 100%;
+            padding: 10px;
+            background: #2575fc;
+            color: #fff;
+            border: none;
             border-radius: 8px;
-            font-size: 16px;
             cursor: pointer;
-            transition: 0.3s;
+            font-size: 15px;
         }
-        button:hover {
+        .btn:hover {
             background: #1a5edb;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #2575fc;
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
             text-decoration: none;
+            color: #2575fc;
         }
-        .back-link:hover {
-            text-decoration: underline;
+        .message {
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
+        .success { color: green; }
+        .error { color: red; }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="card">
         <h2>Tambah Data Bioskop</h2>
-        <form action="proses.php" method="POST">
-            <div class="form-group">
-                <label>Film</label>
+
+        <?php if ($message == "success"): ?>
+            <p class="message success">✅ Data berhasil disimpan!</p>
+        <?php elseif ($message == "error"): ?>
+            <p class="message error">❌ Data gagal disimpan!</p>
+        <?php endif; ?>
+
+        <form action="" method="POST">
+            <div class="input-group">
                 <input type="text" name="film" placeholder="Judul Film" required>
             </div>
-            <div class="form-group">
-                <label>Jadwal</label>
+            <div class="input-group">
                 <input type="datetime-local" name="jadwal" required>
             </div>
-            <div class="form-group">
-                <label>Penonton</label>
+            <div class="input-group">
                 <input type="text" name="penonton" placeholder="Nama Penonton" required>
             </div>
-            <div class="form-group">
-                <label>Tiket</label>
+            <div class="input-group">
                 <input type="text" name="tiket" placeholder="Kode Tiket" required>
             </div>
-            <button type="submit">Simpan</button>
+            <button type="submit" class="btn">Simpan</button>
         </form>
-        <a href="index.php" class="back-link">← Kembali</a>
+        <a href="index.php" class="back">← Kembali</a>
     </div>
 </body>
 </html>
