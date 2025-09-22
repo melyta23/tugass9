@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 $host = "localhost";   // atau bisa coba "127.0.0.1"
 $user = "root";        // username MySQL (cek lagi di server sekolah, bisa jadi bukan root)
-$pass = "";            // isi password kalau ada
+$pass = "0089260734";            // isi password kalau ada
 $db   = "db_xirpl1-13_1"; // nama database
 
 // Membuat koneksi
